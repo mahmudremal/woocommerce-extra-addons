@@ -67,6 +67,8 @@ The options will now be displayed on the product details page, and the total pro
 ![Meta Box](templates/screenshot/metabox.png)
 ![Product Page](templates/screenshot/product.png)
 ![Checkout Page](templates/screenshot/checkout.png)
+![Order Confirmation](templates/screenshot/confirmation.png)
+![Edit Order](templates/screenshot/edit-order.png)
 
 
 ## Support

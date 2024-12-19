@@ -23,6 +23,7 @@ class Cart {
 		add_filter('woocommerce_add_cart_item_data', [ $this, 'add_product_options_to_cart' ], 10, 2);
 		add_filter('woocommerce_get_item_data', [ $this, 'display_product_options_in_cart' ], 10, 2);
 		add_action('woocommerce_before_calculate_totals', [ $this, 'update_cart_total_with_options' ]);
+		add_action('woocommerce_checkout_create_order_line_item', [ $this, 'add_product_options_to_order_items' ], 10, 4);
 	}
 
 	/**
@@ -92,6 +93,29 @@ class Cart {
 
 			// Set the new price
 			$product->set_price($base_price + $additional_price);
+		}
+	}
+
+	/**
+	 * Adds product options to order items.
+	 *
+	 * @param WC_Order_Item_Product $item The order item.
+	 * @param string $cart_item_key The cart item key.
+	 * @param array $values The cart item values.
+	 * @param WC_Order $order The order object.
+	 */
+	public function add_product_options_to_order_items($item, $cart_item_key, $values, $order) {
+		if (isset($values['product_options'])) {
+			$_options = json_decode($values['product_options'], true);
+			$_options = array_map(function($option) {
+				[$label, $price] = $option;
+				$price = floatval($price);
+				return $label . ' (' . wc_price($price) . ')';
+			}, $_options);
+			$item->add_meta_data(
+				__('Product Options', 'woo-extra-addons-options'),
+				implode(", \n", $_options)
+			);
 		}
 	}
 }
