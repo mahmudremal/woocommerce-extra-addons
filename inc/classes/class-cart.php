@@ -4,16 +4,34 @@
  */
 namespace WOOXTRAADDONS\inc;
 use WOOXTRAADDONS\inc\Traits\Singleton;
+
 class Cart {
 	use Singleton;
+
+	/**
+	 * Constructor for the Cart class.
+	 * Sets up hooks.
+	 */
 	protected function __construct() {
 		$this->setup_hooks();
 	}
+
+	/**
+	 * Sets up WordPress hooks for the cart functionality.
+	 */
 	protected function setup_hooks() {
 		add_filter('woocommerce_add_cart_item_data', [ $this, 'add_product_options_to_cart' ], 10, 2);
 		add_filter('woocommerce_get_item_data', [ $this, 'display_product_options_in_cart' ], 10, 2);
 		add_action('woocommerce_before_calculate_totals', [ $this, 'update_cart_total_with_options' ]);
 	}
+
+	/**
+	 * Adds selected product options to the cart item data.
+	 *
+	 * @param array $cart_item_data The cart item data.
+	 * @param int $product_id The product ID.
+	 * @return array Modified cart item data.
+	 */
 	public function add_product_options_to_cart($cart_item_data, $product_id) {
 		if (isset($_POST['product_options'])) {
 			$_options = $_POST['product_options'];
@@ -27,7 +45,13 @@ class Cart {
 		return $cart_item_data;
 	}
 
-	// Display selected options in the cart
+	/**
+	 * Displays selected product options in the cart.
+	 *
+	 * @param array $item_data The item data.
+	 * @param array $cart_item The cart item.
+	 * @return array Modified item data.
+	 */
 	public function display_product_options_in_cart($item_data, $cart_item) {
 		if (isset($cart_item['product_options'])) {
 			$_options = json_decode($cart_item['product_options'], true);
@@ -43,7 +67,12 @@ class Cart {
 		}
 		return $item_data;
 	}
-	// Adjust the cart total based on selected options
+
+	/**
+	 * Adjusts the cart total based on selected product options.
+	 *
+	 * @param WC_Cart $cart The WooCommerce cart object.
+	 */
 	public function update_cart_total_with_options($cart) {
 		if (is_admin() && !defined('DOING_AJAX')) return;
 
@@ -53,6 +82,7 @@ class Cart {
 			$base_price = $product->get_regular_price();
 			$additional_price = 0;
 
+			// Calculate the additional price based on selected options
 			if (isset($cart_item['product_options'])) {
 				$_options = json_decode($cart_item['product_options'], true);
 				foreach ($_options as $option) {

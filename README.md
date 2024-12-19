@@ -1,32 +1,73 @@
-# WoordPress CRM based on facebook leads
-This pugin created for gathering leads from facebook and working on it with calendly, google spreadsheet and more.
-<!-- <img src="!/assets/img/popup" alt="YouTube"> -->
-### Hi, I'm Remal Mahmud, currently working on something freelance projects 😉
-### Connect with me:
+# WooCommerce Extra Addons Plugin
 
-[<img src="https://img.shields.io/badge/Upwork-14a800?&style=for-the-badge&logo=upwork&logoColor=white" height="25" alt="Remal Mahmud">](https://www.upwork.com/freelancers/~01e8b599b6a5efc0f7?s=general)
-[<img src="https://img.shields.io/badge/Fiverr-1dbf73?&style=for-the-badge&logo=fiverr&logoColor=white" height="25" alt="Remal Mahmud">](https://www.fiverr.com/mahmud_remal)
-[<img src="https://img.shields.io/badge/Twitter-1d9bf0?&style=for-the-badge&logo=twitter&logoColor=white" height="25" alt="Remal Mahmud">](https://twitter.com/mahmud_remal/)
-[<img src="https://img.shields.io/badge/Linkedin-0b66c3?&style=for-the-badge&logo=linkedin&logoColor=white" height="25" alt="Remal Mahmud">](https://www.linkedin.com/in/mahmudremal/)
-[<img src="https://img.shields.io/badge/Facebook-3b5999?&style=for-the-badge&logo=facebook&logoColor=white" height="25" alt="Remal Mahmud">](https://www.facebook.com/mahmudremal/)
-[<img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-fe7d37?&style=for-the-badge" height="25" alt="Remal Mahmud">](https://www.buymeacoffee.com/mahmudremal/)
+## Overview
+The WooCommerce Extra Addons plugin allows you to add extra options to your WooCommerce products. These options can be configured from the backend and displayed on the product details page. The selected options will affect the total product price and will be shown in the cart, checkout, and order details.
 
-<br />
+## Features
+- Add extra options to WooCommerce products.
+- Options can be configured with a title and price.
+- Options are displayed as radio buttons on the product details page.
+- The total product price is updated based on the selected options.
+- Selected options are shown in the cart, checkout, and order details.
 
-### My Programing Range:
+## Installation
+1. Download the plugin files.
+2. Upload the plugin folder to the `/wp-content/plugins/` directory.
+3. Activate the plugin through the 'Plugins' menu in WordPress.
 
-<img align="left" alt="Visual Studio Code" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/visual-studio-code/visual-studio-code.png" />
-<img align="left" alt="HTML5" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/html/html.png" />
-<img align="left" alt="CSS3" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/css/css.png" />
-<img align="left" alt="Sass" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/sass/sass.png" />
-<img align="left" alt="JavaScript" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/javascript/javascript.png" />
-<img align="left" alt="React" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/react/react.png" />
-<img align="left" alt="Node.js" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/nodejs/nodejs.png" />
-<img align="left" alt="MySQL" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/mysql/mysql.png" />
-<img align="left" alt="Git" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/git/git.png" />
-<img align="left" alt="GitHub" width="26px" src="https://raw.githubusercontent.com/github/explore/78df643247d429f6cc873026c0622819ad797942/topics/github/github.png" />
-<img align="left" alt="HTML5" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/terminal/terminal.png" />
-<br />
-<br />
+## Usage
 
----
+### Adding Product Options
+1. Go to the product edit page in the WordPress admin.
+2. Scroll down to the "Product Options" meta box.
+3. Add tabs and options as needed. Each option can have a title, price, and thumbnail image.
+4. Save the product.
+
+### Displaying Product Options
+The options will be displayed on the product details page as radio buttons. When a radio button is selected, the total product price will be updated to include the price of the selected option.
+
+### Viewing Selected Options
+The selected options will be shown in the cart, checkout, and order details in WooCommerce > Orders.
+
+## Code Overview
+
+### JavaScript Files
+
+#### `frontend/index.js`
+This file contains the frontend script for handling the display and interaction of product options on the product details page.
+
+#### `backend/index.js`
+This file contains the backend script for handling the meta box where product options are configured.
+
+### PHP Files
+
+#### `class-meta-boxes.php`
+This file contains the code for registering and displaying the meta box for product options on the product edit page.
+
+#### `class-product.php`
+This file contains the code for displaying the product options on the product details page.
+
+#### `class-cart.php`
+This file contains the code for adding the selected product options to the cart, displaying them in the cart, and updating the cart total based on the selected options.
+
+## Example
+Here is an example of how to add product options to a product:
+
+1. Go to the product edit page.
+2. Scroll down to the "Product Options" meta box.
+3. Click "Add Tab" to create a new tab.
+4. Enter a title and content for the tab.
+5. Click "Add Option" to create a new option.
+6. Enter a title, price, and thumbnail URL for the option.
+7. Save the product.
+
+The options will now be displayed on the product details page, and the total product price will be updated based on the selected options.
+
+## Screenshot
+![Meta Box](templates/screenshot/metabox.png)
+![Product Page](templates/screenshot/product.png)
+![Checkout Page](templates/screenshot/checkout.png)
+
+
+## Support
+If you have any questions or need help with the plugin, please contact us at mahmudremal@yahoo.com.

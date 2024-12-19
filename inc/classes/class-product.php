@@ -6,14 +6,30 @@
  */
 namespace WOOXTRAADDONS\inc;
 use WOOXTRAADDONS\inc\Traits\Singleton;
+
 class Product {
 	use Singleton;
+
+	/**
+	 * Constructor for the Product class.
+	 * Sets up hooks.
+	 */
 	protected function __construct() {
 		$this->setup_hooks();
 	}
+
+	/**
+	 * Sets up WordPress hooks for product options.
+	 */
 	protected function setup_hooks() {
 		add_action('woocommerce_before_add_to_cart_button', [ $this, 'display_product_options' ]);
 	}
+
+	/**
+	 * Displays product options on the single product page.
+	 *
+	 * @return void
+	 */
 	public function display_product_options() {
 		global $post;
 		$_tabs = get_post_meta($post->ID, '_extra_product_addons', true);

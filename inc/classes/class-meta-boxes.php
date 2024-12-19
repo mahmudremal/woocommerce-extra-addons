@@ -6,15 +6,25 @@
  */
 namespace WOOXTRAADDONS\inc;
 use WOOXTRAADDONS\inc\Traits\Singleton;
+
 /**
  * Class Meta_Boxes
  */
 class Meta_Boxes {
 	use Singleton;
+
+	/**
+	 * Constructor for the Meta_Boxes class.
+	 * Sets up hooks.
+	 */
 	protected function __construct() {
-		// load class.
+		// Load class.
 		$this->setup_hooks();
 	}
+
+	/**
+	 * Sets up WordPress hooks for meta boxes.
+	 */
 	protected function setup_hooks() {
 		/**
 		 * Actions.
@@ -22,6 +32,7 @@ class Meta_Boxes {
 		add_action( 'add_meta_boxes', [ $this, 'add_custom_meta_box' ] );
 		add_action( 'save_post', [ $this, 'save_product_options' ] );
 	}
+
 	/**
 	 * Add custom meta box.
 	 *
@@ -30,10 +41,11 @@ class Meta_Boxes {
 	public function add_custom_meta_box() {
 		add_meta_box('product_options', 'Product Options', [ $this, 'custom_meta_box_html' ], 'product', 'normal', 'high');
 	}
+
 	/**
-	 * Custom meta box HTML( for form )
+	 * Custom meta box HTML (for form).
 	 *
-	 * @param object $post Post.
+	 * @param object $post Post object.
 	 *
 	 * @return void
 	 */
@@ -45,11 +57,11 @@ class Meta_Boxes {
 		</div>
 		<?php
 	}
+
 	/**
-	 * Save post meta into database
-	 * when the post is saved.
+	 * Save post meta into database when the post is saved.
 	 *
-	 * @param integer $post_id Post id.
+	 * @param integer $post_id Post ID.
 	 *
 	 * @return void
 	 */

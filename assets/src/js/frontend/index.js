@@ -1,7 +1,7 @@
 /**
  * Frontend Script.
  * 
- * @package TeddyBearCustomizeAddon
+ * @package WooXtraAddons
  */
 
 ( function ( $ ) {
@@ -31,6 +31,9 @@
 		 * Handles tab click events and form submission validation.
 		 */
 		init_single_product() {
+			/**
+			 * Handle tab click events.
+			 */
 			const tabHandlers = document.querySelectorAll('.product-tab .tab-title');
 			tabHandlers.forEach(tabHandler => {
 				tabHandler.addEventListener('click', function(event) {
@@ -44,7 +47,9 @@
 					}
 				});
 			});
-			
+			/**
+			 * Function to remove error notices on checkbox change.
+			 */
 			const tabs = document.querySelectorAll('[data-required-fields="true"], [data-required-fields="1"]');
 			[...tabs].forEach(tab => {
 				tab.querySelectorAll('[type=checkbox]').forEach(checkbox => {
@@ -54,12 +59,24 @@
 					});
 				});
 			});
-			// 
+			/**
+			 * Validate form submission.
+			 */
 			document.querySelectorAll('form.cart').forEach(form => {
 				form.addEventListener('submit', function(e) {
 					let valid = tabs.length === 0 || [...tabs].some(tab => tab.querySelectorAll('[type=checkbox]:checked').length > 0);
 					if (!valid) {
+						/**
+						 * Prevent form submission if required fields are not filled.
+						 */
 						e.preventDefault();
+						/**
+						 * Stop propagation to prevent multiple
+						 */
+						e.stopPropagation();
+						/**
+						 * Show error notices on the required tabs
+						 */
 						const errorShownOn = [...tabs].filter(tab => tab.querySelectorAll('[type=checkbox]:checked').length <= 0);
 						errorShownOn.forEach(tab => {
 							tab.querySelectorAll('.notice').forEach(notice => notice.remove());
@@ -70,12 +87,18 @@
 							notice.textContent = 'Please select at least one option in this tab.';
 							tab.insertBefore(notice, tab.children[0]);
 						});
+						/**
+						 * Scroll to the first tab with an error
+						 */
 						if (errorShownOn.length > 0) {
 							errorShownOn[0].scrollIntoView({ behavior: 'smooth' });
 						}
 						// alert('Please select at least one option in the required tabs.');
 						return false;
 					}
+					/**
+					 * Approve submission to proceed.
+					 */
 					return true;
 				});
 			});

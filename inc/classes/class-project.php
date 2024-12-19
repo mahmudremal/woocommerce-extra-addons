@@ -6,46 +6,52 @@
  */
 namespace WOOXTRAADDONS\inc;
 use WOOXTRAADDONS\inc\Traits\Singleton;
+
 class Project {
 	use Singleton;
+
+	/**
+	 * Constructor for the Project class.
+	 * Loads necessary classes and sets up hooks.
+	 */
 	protected function __construct() {
-		// Load class.
+		// Load class instances.
 		Assets::get_instance();
 		Cart::get_instance();
 		Meta_Boxes::get_instance();
 		Product::get_instance();
-		// 
+		// Uncomment the following line if setup_hooks needs to be called.
 		// $this->setup_hooks();
 	}
+
+	/**
+	 * Sets up WordPress hooks for the project.
+	 */
 	protected function setup_hooks() {
 		add_action( 'init', [ $this, 'init' ], 1, 0 );
 		register_activation_hook( WOO_XTRA_ADDONS__FILE__, [ $this, 'register_activation_hook' ] );
 		register_deactivation_hook( WOO_XTRA_ADDONS__FILE__, [ $this, 'register_deactivation_hook' ] );
 	}
+
+	/**
+	 * Initializes the plugin.
+	 * Loads the text domain for localization.
+	 */
 	public function init() {
-		/**
-		 * loco translator Lecto AI: api: V13Y91F-DR14RP6-KP4EAF9-S44K7SX
-		 */
 		load_plugin_textdomain( 'woo-extra-addons-options', false, dirname( plugin_basename( WOO_XTRA_ADDONS__FILE__ ) ) . '/languages' );		
 	}
+
+	/**
+	 * Handles tasks to be performed on plugin activation.
+	 */
 	public function register_activation_hook() {
-		global $wpdb;$prefix = $wpdb->prefix . 'fwp_';
-		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-		$charset_collate = $wpdb->get_charset_collate();
-		$tables = [];
-		foreach( $tables as $table ) {
-			dbDelta( $table );
-		}
-		$options = [ 'fwp_google_auth_code', 'fwp_google_afterauth_redirect' ];
-		foreach( $options as $option ) {
-			if( ! get_option( $option, false ) ) {add_option( $option, [] );}
-		}
+		// Perform setup tasks here.
 	}
+
+	/**
+	 * Handles tasks to be performed on plugin deactivation.
+	 */
 	public function register_deactivation_hook() {
-		global $wpdb;$prefix = $wpdb->prefix . 'fwp_';
-		$tables = []; // [ 'stripe_payments', 'stripe_subscriptions', 'googledrive' ];
-		foreach( $tables as $table ) {
-			// $wpdb->query( "DROP TABLE IF EXISTS {$prefix}{$table};" );
-		}
+		// Perform cleanup tasks here.
 	}
 }
