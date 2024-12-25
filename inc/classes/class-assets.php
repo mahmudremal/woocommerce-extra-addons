@@ -26,7 +26,7 @@ class Assets {
 		add_action( 'wp_enqueue_scripts', [ $this, 'register_styles' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'register_scripts' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue_scripts' ], 10, 1 );
-		add_filter( 'wooxtraaddons//siteconfig', [ $this, 'siteConfig' ], 1, 1 );
+		add_filter( 'wooxtraaddons/siteconfig', [ $this, 'siteConfig' ], 1, 1 );
 	}
 
 	/**
@@ -47,7 +47,7 @@ class Assets {
 		if (!is_product()) {return;}
 		$version = $this->filemtime(WOO_XTRA_ADDONS_BUILD_JS_DIR_PATH.'/public.js');
 		wp_enqueue_script( 'xtra-product-options-public', WOO_XTRA_ADDONS_BUILD_JS_URI . '/public.js', ['jquery'], $version, true );
-		wp_localize_script( 'xtra-product-options-public', 'fwpSiteConfig', apply_filters( 'wooxtraaddons//siteconfig', [] ) );
+		wp_localize_script( 'xtra-product-options-public', 'fwpSiteConfig', apply_filters( 'wooxtraaddons/siteconfig', [] ) );
 	}
 
 	/**
@@ -64,7 +64,7 @@ class Assets {
 		wp_enqueue_style( 'xtra-product-options-admin', WOO_XTRA_ADDONS_BUILD_CSS_URI . '/admin.css', [], $this->filemtime( WOO_XTRA_ADDONS_BUILD_CSS_DIR_PATH . '/admin.css' ), 'all' );
 		wp_enqueue_script( 'xtra-product-options-admin', WOO_XTRA_ADDONS_BUILD_JS_URI . '/admin.js', [ 'jquery' ], $this->filemtime( WOO_XTRA_ADDONS_BUILD_JS_DIR_PATH . '/admin.js' ), true );
 		
-		wp_localize_script('xtra-product-options-admin','fwpSiteConfig',apply_filters('wooxtraaddons//siteconfig',[
+		wp_localize_script('xtra-product-options-admin','fwpSiteConfig',apply_filters('wooxtraaddons/siteconfig',[
 			'config' => [
 				'category_id' => isset($_GET['tag_ID'])?(int) $_GET['tag_ID']:get_query_var('tag_ID',false)
 			]

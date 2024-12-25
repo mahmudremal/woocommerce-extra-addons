@@ -119,6 +119,10 @@ import ReactDOM from 'react-dom';
 															<input type="text" value={option.title} onChange={(e) => this.handleOptionChange(tabIndex, optionIndex, 'title', e.target.value)} className="xpo_mt-1 xpo_block xpo_w-full" />
 														</label>
 														<label className="xpo_block xpo_mb-2">
+															<span className="xpo_text-gray-700">Option Price</span>
+															<input type="number" step="any" value={option.price} onChange={(e) => this.handleOptionChange(tabIndex, optionIndex, 'price', e.target.value)} className="xpo_mt-1 xpo_block xpo_w-full" />
+														</label>
+														<label className="xpo_block xpo_mb-2">
 															<span className="xpo_text-gray-700">Image URL</span>
 															<input type="text" value={option.thumbnail} onChange={(e) => this.handleOptionChange(tabIndex, optionIndex, 'thumbnail', e.target.value)} className="xpo_mt-1 xpo_block xpo_w-full" />
 														</label>

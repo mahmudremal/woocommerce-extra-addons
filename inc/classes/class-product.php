@@ -36,6 +36,7 @@ class Product {
 		if ($_tabs) {
 			if (is_string($_tabs)) {
 				$_tabs = json_decode($_tabs, true);
+				echo '<pre>';print_r($_tabs);
 			}
 			?>
 			<h3><?php echo esc_html('Extra Item', 'woo-extra-addons-options'); ?></h3>
